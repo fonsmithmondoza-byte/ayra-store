@@ -1,0 +1,31 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #app { background: #ffffff !important; font-family: Inter, system-ui, sans-serif; }
+
+.ayra-topbar { height: 36px; background: #f7f5f2; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; font-size: 12px; color: #555; border-bottom: 1px solid #eee; }
+.ayra-header { background: #fff; position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #eee; }
+.ayra-header-main { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 20px; max-width: 1600px; margin: 0 auto; }
+.ayra-logo { font-size: 22px; letter-spacing: 6px; font-weight: 300; display: flex; align-items: center; gap: 6px; }
+.ayra-logo .mark { font-weight: 800; font-size: 28px; }
+.main-nav { display: flex; gap: 22px; font-size: 14px; }
+.main-nav .active { border-bottom: 1px solid #a8b5a2; }
+.main-nav .sale { color: #c55; }
+.search-pill { flex: 1; max-width: 460px; height: 42px; background: #f5f3f0; border-radius: 999px; display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+.search-pill input { flex: 1; border: none; background: transparent; outline: none; font-size: 13px; }
+.search-pill button { border: none; background: transparent; font-size: 12px; color: #666; }
+.actions { display: flex; gap: 20px; font-size: 20px; }
+.actions b { background: #a8b5a2; color: #fff; font-size: 10px; border-radius: 50%; width: 16px; height: 16px; display: inline-grid; place-items: center; position: relative; top: -10px; left: -6px; }
+.ayra-subnav { height: 48px; border-top: 1px solid #f5f3f0; display: flex; align-items: center; padding: 0 24px; gap: 28px; max-width: 1600px; margin: 0 auto; }
+.all-btn { background: #111; color: #fff; border: none; height: 32px; padding: 0 16px; border-radius: 999px; font-size: 13px; }
+.sub-links { display: flex; gap: 24px; font-size: 13px; color: #444; }
+.sub-links .sale { color: #c55; }
+
+.hero { max-width: 1600px; margin: 32px auto; padding: 0 24px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 24px; }
+.product-card { border: 1px solid #eee; border-radius: 16px; overflow: hidden; }
+.product-card img { width: 100%; height: 320px; object-fit: cover; }
+.product-card .info { padding: 12px; }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
