@@ -5,7 +5,7 @@ export const ProductDetail = `
 `
 
 export function initProductDetail(id: number) {
-  fetch(`http://api/products/${id}`)
+  fetch(`/api/products/${id}`)
     .then(r => r.json())
     .then(p => {
       document.getElementById('product-detail')!.innerHTML = `
