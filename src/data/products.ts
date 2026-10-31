@@ -1,13 +1,14 @@
-[
-  { "id": 1, "name": "Essential Cotton Tee", "price": 29, "category": "Women", "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500" },
-  { "id": 2, "name": "Linen Blend Trousers", "price": 89, "category": "Women", "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500" },
-  { "id": 3, "name": "Minimal Tote Bag", "price": 45, "category": "Bags", "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500" },
-  { "id": 5, "name": "Silk Summer Dress", "price": 149, "category": "Women", "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500" },
-  { "id": 6, "name": "Leather Crossbody", "price": 95, "category": "Bags", "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" },
-  { "id": 7, "name": "Cashmere Cardigan", "price": 135, "category": "Women", "image": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500" },
-  { "id": 8, "name": "Classic Oxford Shirt", "price": 75, "category": "Men", "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500" },
-  { "id": 9, "name": "Relaxed Chino Pants", "price": 68, "category": "Men", "image": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500" },
-  { "id": 10, "name": "Canvas Weekender", "price": 110, "category": "Bags", "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-  { "id": 11, "name": "Ceramic Vase Set", "price": 55, "category": "Home", "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500" },
-  { "id": 12, "name": "Linen Throw Pillow", "price": 42, "category": "Home", "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" }
-]
+﻿export const getProducts = async (category?: string) => {
+  const res = await fetch("/products.json");
+  if (!res.ok) throw new Error("Failed to fetch");
+  let data = await res.json();
+  if (category) {
+    data = data.filter((p: any) => p.category.toLowerCase() === category.toLowerCase());
+  }
+  return data;
+};
+
+export const getProductById = async (id: number) => {
+  const products = await getProducts();
+  return products.find((p: any) => p.id === id);
+};
