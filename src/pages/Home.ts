@@ -44,7 +44,7 @@ export function initHome() {
 
     function loadProducts(category?: string) {
     productsEl.innerHTML = "<p>Loading...</p>"
-    const url = category ? `http://127.0.0.1:5000/api/products?category=${category}` : `http://127.0.0.1:5000/api/products`
+    const url = category ? `http://api/products?category=${category}` : `http://api/products`
     console.log("Fetching:", url);
     fetch(url)
       .then(r => {
