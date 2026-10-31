@@ -33,16 +33,18 @@ def get_products():
         filtered = [p for p in products if p["category"].lower() == category.lower()]
         return jsonify(filtered)
     return jsonify(products)
+
 @app.route("/api/products/<int:product_id>")
 def get_product(product_id):
     prod = next((p for p in products if p["id"] == product_id), None)
     if prod:
         return jsonify(prod)
     return jsonify({"error": "Not found"}), 404
+
 @app.route("/")
 def home():
     return "AYRA Python API running - 12 products"
 
+# --- Vercel & Local Compatible ---
 if __name__ == "__main__":
-# For Vercel deployment
-    app = app
+    app.run(port=5000, debug=True)
