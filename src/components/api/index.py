@@ -26,7 +26,7 @@ products = [
   { "id": 12, "name": "Linen Throw Pillow", "price": 42, "category": "Home", "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" },
 ]
 
-@app.route("/api/products")
+@app.route("/products.json")
 def get_products():
     category = request.args.get("category")
     if category:
@@ -34,7 +34,7 @@ def get_products():
         return jsonify(filtered)
     return jsonify(products)
 
-@app.route("/api/products/<int:product_id>")
+@app.route("/products.json/<int:product_id>")
 def get_product(product_id):
     prod = next((p for p in products if p["id"] == product_id), None)
     if prod:

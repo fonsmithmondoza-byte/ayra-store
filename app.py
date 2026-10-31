@@ -26,7 +26,7 @@ products = [
   { "id": 12, "name": "Linen Throw Pillow", "price": 42, "category": "Home", "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" },
 ]
 
-@app.route("/api/products")
+@app.route("/products.json")
 def get_products():
     category = request.args.get("category")
     if category:
