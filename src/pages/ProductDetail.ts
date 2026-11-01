@@ -2,11 +2,38 @@ export const ProductDetail = `
   <div id="product-detail" style="padding:40px 4%; min-height:70vh;">
     <p>Loading product...</p>
   </div>
+  <div id="cart-toast" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:#111; color:white; padding:14px 28px; font-size:13px; letter-spacing:0.5px; border-radius:2px; opacity:0; transition: all 0.4s ease; z-index:9999; pointer-events:none; display:flex; align-items:center; gap:12px; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+    <span>✓</span><span id="toast-text">Added to cart</span>
+  </div>
 `
 
 export function initProductDetail(id: number) {
   const detailEl = document.getElementById('product-detail')!;
   detailEl.innerHTML = `<p>Loading product...</p>`;
+
+  function showToast(message: string) {
+    const toast = document.getElementById('cart-toast')!;
+    const text = document.getElementById('toast-text')!;
+    text.innerText = message;
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.transform = 'translateX(-50%) translateY(100px)';
+      toast.style.opacity = '0';
+    }, 2500);
+  }
+
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCountEl = document.querySelector('#cart-count');
+    if (cartCountEl) cartCountEl.textContent = String(cart.length);
+    // Also update header button if you have CART badge
+    const cartBtn = document.querySelector('header') as HTMLElement;
+    if (cartBtn) {
+      const badge = document.getElementById('cart-badge');
+      if (badge) badge.textContent = String(cart.length);
+    }
+  }
 
   fetch(`/products.json`)
     .then(r => {
@@ -37,13 +64,12 @@ export function initProductDetail(id: number) {
               <button class="size-btn" style="border:1px solid #ddd; padding:8px 16px; cursor:pointer; background:white;">L</button>
             </div>
 
-            <button id="addToCartBtn" style="width:100%; background:black; color:white; padding:16px; border:none; letter-spacing:2px; font-size:13px; cursor:pointer;">ADD TO CART</button>
+            <button id="addToCartBtn" style="width:100%; background:black; color:white; padding:16px; border:none; letter-spacing:2px; font-size:13px; cursor:pointer; transition: opacity 0.2s;">ADD TO CART</button>
             <button id="backBtn" style="width:100%; background:white; color:black; padding:16px; border:1px solid black; letter-spacing:2px; font-size:13px; cursor:pointer; margin-top:12px;">← BACK TO SHOP</button>
           </div>
         </div>
       `
 
-      // Size selection
       document.querySelectorAll('.size-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.size-btn').forEach(b => {
@@ -57,12 +83,22 @@ export function initProductDetail(id: number) {
         })
       })
 
-      document.getElementById('addToCartBtn')!.addEventListener('click', () => {
+      document.getElementById('addToCartBtn')!.addEventListener('click', (e) => {
+        const btn = e.target as HTMLButtonElement;
         const cart = JSON.parse(localStorage.getItem('cart') || '[]')
         cart.push(p)
         localStorage.setItem('cart', JSON.stringify(cart))
-        alert(`${p.name} added to cart! Cart has ${cart.length} items`)
-        window.location.hash = '#cart'
+        
+        // Professional feedback - no alert!
+        btn.innerText = '✓ ADDED';
+        btn.style.opacity = '0.8';
+        showToast(`${p.name} added to cart • ${cart.length} items`);
+        updateCartCount();
+
+        setTimeout(() => {
+          btn.innerText = 'ADD TO CART';
+          btn.style.opacity = '1';
+        }, 1500);
       })
 
       document.getElementById('backBtn')!.addEventListener('click', () => {
