@@ -7,8 +7,6 @@ window.fetch = ((url: any, ...args: any[]) => {
   return originalFetch(url, ...args);
 }) as any;
 // Clean Home.ts - uses /products.json only
-const BestSellersEl = document.getElementById('best-sellers') || document.querySelector('[data-bestsellers]');
-
 async function loadBestSellers() {
   try {
     const res = await fetch('/products.json');
