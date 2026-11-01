@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json())
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ayra-super-secret-2026'
-const DATA_DIR = path.join(process.cwd(), 'api', 'data')
+const DATA_DIR = path.join('/tmp', 'ayra-data')
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, {recursive:true})
 
 const USERS_FILE = path.join(DATA_DIR, 'users.json')
@@ -35,7 +35,6 @@ function auth(req,res,next){
   }catch{ res.status(401).json({error:'Invalid token'}) }
 }
 
-// AUTH
 app.post('/api/auth/register', async (req,res)=>{
   const {name,email,password}=req.body
   if(!email||!password) return res.status(400).json({error:'Missing fields'})
@@ -59,22 +58,24 @@ app.post('/api/auth/login', async (req,res)=>{
   res.json({token,user:{id:u.id,name:u.name,email:u.email,role:u.role}})
 })
 
-// PRODUCTS
 app.get('/api/products', (req,res)=>{
   const prods=readProds().filter(p=>p.approved!==false)
   res.json(prods)
 })
+
 app.get('/api/products/my', auth, (req,res)=>{
   const prods=readProds().filter(p=>p.sellerId===req.user.id)
   res.json(prods)
 })
+
 app.post('/api/products', auth, (req,res)=>{
   const {name,price,image,category}=req.body
   const prods=readProds()
-  const newP={id:Date.now(),name,price:Number(price),image,category:category||'general',sellerId:req.user.id,sellerName:req.user.name,approved:req.user.role==='super_admin'?true:false}
+  const newP={id:Date.now(),name,price:Number(price),image,category:category||'general',sellerId:req.user.id,sellerName:req.user.name,approved:true}
   prods.push(newP); writeProds(prods)
   res.json(newP)
 })
+
 app.delete('/api/products/:id', auth, (req,res)=>{
   let prods=readProds()
   const p=prods.find(x=>x.id==req.params.id)
@@ -83,7 +84,7 @@ app.delete('/api/products/:id', auth, (req,res)=>{
   prods=prods.filter(x=>x.id!=req.params.id); writeProds(prods)
   res.json({ok:true})
 })
-// ADMIN
+
 app.get('/api/admin/all', auth, (req,res)=>{
   if(req.user.role!=='super_admin') return res.status(403).json({error:'Admin only'})
   res.json({users:readUsers().map(u=>({id:u.id,name:u.name,email:u.email,role:u.role})),products:readProds()})
