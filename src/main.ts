@@ -3,7 +3,7 @@ import { Header, updateCartCount } from './components/Header'
 import { Home, initHome } from './pages/Home'
 import { ProductDetail, initProductDetail } from './pages/ProductDetail'
 import { Cart as CartPage, initCart } from './pages/Cart'
-import { CheckoutPage, SuccessPage, initCheckout, initSuccess } from './pages/Checkout'
+import { Checkout, initCheckout } from './pages/Checkout'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
@@ -20,13 +20,9 @@ function router() {
     updateCartCount()
     initCart()
   } else if (hash === '#checkout') {
-    app.innerHTML = `${Header} ${CheckoutPage}`
+    app.innerHTML = `${Header} ${Checkout}`
     updateCartCount()
     initCheckout()
-  } else if (hash === '#success') {
-    app.innerHTML = `${Header} ${SuccessPage}`
-    updateCartCount()
-    initSuccess()
   } else {
     app.innerHTML = `${Header} ${Home}`
     updateCartCount()
