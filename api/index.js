@@ -62,12 +62,10 @@ app.get('/api/products', (req,res)=>{
   const prods=readProds().filter(p=>p.approved!==false)
   res.json(prods)
 })
-
 app.get('/api/products/my', auth, (req,res)=>{
   const prods=readProds().filter(p=>p.sellerId===req.user.id)
   res.json(prods)
 })
-
 app.post('/api/products', auth, (req,res)=>{
   const {name,price,image,category}=req.body
   const prods=readProds()
@@ -75,7 +73,6 @@ app.post('/api/products', auth, (req,res)=>{
   prods.push(newP); writeProds(prods)
   res.json(newP)
 })
-
 app.delete('/api/products/:id', auth, (req,res)=>{
   let prods=readProds()
   const p=prods.find(x=>x.id==req.params.id)
@@ -84,7 +81,6 @@ app.delete('/api/products/:id', auth, (req,res)=>{
   prods=prods.filter(x=>x.id!=req.params.id); writeProds(prods)
   res.json({ok:true})
 })
-
 app.get('/api/admin/all', auth, (req,res)=>{
   if(req.user.role!=='super_admin') return res.status(403).json({error:'Admin only'})
   res.json({users:readUsers().map(u=>({id:u.id,name:u.name,email:u.email,role:u.role})),products:readProds()})

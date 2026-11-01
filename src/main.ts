@@ -4,10 +4,11 @@ import { Home, initHome } from './pages/Home'
 import { ProductDetail, initProductDetail } from './pages/ProductDetail'
 import { Cart as CartPage, initCart } from './pages/Cart'
 import { Checkout, initCheckout } from './pages/Checkout'
+import { AuthPage, initAuth } from './pages/Auth'
+import { DashboardPage, initDashboard } from './pages/Dashboard'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
-// INLINE SUCCESS - no import needed
 const Success = `
   <div style="max-width:600px; margin:0 auto; padding:80px 4%; text-align:center;">
     <div style="width:60px; height:60px; background:black; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:26px;">✓</div>
@@ -27,13 +28,33 @@ function initSuccess(){
     const total = lastCart.reduce((s:any,i:any)=>s+i.price*i.qty,0)
     itemsEl.innerHTML = lastCart.map((i:any)=>`<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:12px;"><span>${i.name} x${i.qty}</span><span>$${i.price*i.qty}</span></div>`).join('') + `<div style="display:flex; justify-content:space-between; font-weight:700; border-top:1px solid #eee; padding-top:10px; margin-top:10px;"><span>Total</span><span>$${total}</span></div>`
   } else {
-    itemsEl.innerHTML = `<p style="font-size:12px; opacity:.6; text-align:center;">Your order is being prepared ✨</p>`
+    itemsEl.innerHTML = `<p style="font-size:12px; opacity:.6; text-align:center;">Your order is being prepared</p>`
   }
   document.getElementById('continueShopBtn')?.addEventListener('click',()=> window.location.hash='')
 }
 
 function router() {
   const hash = window.location.hash
+  if (hash === '#login') {
+    app.innerHTML = `${Header} ${AuthPage('login')}`
+    updateCartCount()
+    initAuth('login')
+    return
+  }
+  if (hash === '#register') {
+    app.innerHTML = `${Header} ${AuthPage('register')}`
+    updateCartCount()
+    initAuth('register')
+    return
+  }
+  if (hash === '#dashboard') {
+    const html = DashboardPage()
+    if(html.includes('Redirect')) return
+    app.innerHTML = `${Header} ${html}`
+    updateCartCount()
+    initDashboard()
+    return
+  }
   if (hash === '#success') {
     app.innerHTML = `${Header} ${Success}`
     updateCartCount()
