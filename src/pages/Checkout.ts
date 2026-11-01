@@ -43,9 +43,15 @@ export function initCheckout(){
     const raw = JSON.parse(localStorage.getItem('cart') || '[]')
     const map = new Map()
     raw.forEach((item:any)=>{
-      const key = `${item.id}-${item.selectedSize||''}-${item.selectedColor||''}`
-      if(!map.has(key)) map.set(key, {...item, qty: item.qty || 1})
-      else map.get(key).qty += item.qty || 1
+      const key = `${item.id}` // FIX: merge by ID only - fixes old cart data
+      if(!map.has(key)){
+        map.set(key, {...item, qty: item.qty || 1})
+      } else {
+        const ex = map.get(key)
+        ex.qty += item.qty || 1
+        if(!ex.selectedSize && item.selectedSize) ex.selectedSize = item.selectedSize
+        if(!ex.selectedColor && item.selectedColor) ex.selectedColor = item.selectedColor
+      }
     })
     return Array.from(map.values())
   }
