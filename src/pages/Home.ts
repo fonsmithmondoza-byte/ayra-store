@@ -1,215 +1,158 @@
 export const Home = `
-<div style="font-family:Inter,system-ui,sans-serif; background:#f5f7fb;">
+<div style="font-family:Inter,sans-serif; background:#f3f6fb;">
 
-<!-- TOP BAR -->
-<div style="background:#0a1f44; color:white; display:flex; justify-content:space-between; align-items:center; padding:8px 4%; font-size:11px; letter-spacing:.2px; flex-wrap:wrap; gap:8px;">
-  <div style="display:flex; gap:24px; align-items:center;">
-    <span style="display:flex; align-items:center; gap:6px;">🚚 Free Delivery Across Cameroon</span>
-    <span style="display:flex; align-items:center; gap:6px;">🛡️ Secure Payment</span>
-    <span style="display:flex; align-items:center; gap:6px;">🎧 24/7 Support</span>
+<!-- TOP INFO BAR - EXACT -->
+<div style="background:#0a1e3f; color:#fff; display:flex; justify-content:space-between; padding:7px 3.5%; font-size:11px; font-weight:500;">
+  <div style="display:flex; gap:28px;">
+    <span>🚚 Free Delivery Across Cameroon</span>
+    <span>🛡️ Secure Payment</span>
+    <span>🎧 24/7 Support</span>
   </div>
-  <div style="opacity:.9;">Welcome to JARVIS DIGITAL!</div>
+  <span>Welcome to JARVIS DIGITAL!</span>
 </div>
 
-<!-- HEADER -->
-<div style="background:white; display:flex; align-items:center; justify-content:space-between; padding:12px 4%; gap:16px; flex-wrap:wrap;">
-  <div style="display:flex; align-items:center; gap:10px;">
-    <div style="font-size:32px;">🛒</div>
+<!-- LOGO + SEARCH + CART - EXACT -->
+<div style="background:#fff; display:flex; align-items:center; justify-content:space-between; padding:14px 3.5%; gap:20px;">
+  <div style="display:flex; align-items:center; gap:10px; min-width:210px;">
+    <div style="width:38px; height:38px; background:#0a1e3f; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:22px;">🛒</div>
     <div>
-      <div style="font-weight:900; font-size:22px; line-height:1; color:#0a1f44; letter-spacing:-.5px;">JARVIS DIGITAL</div>
-      <div style="font-size:11px; font-weight:700; letter-spacing:.5px; color:#0a1f44;">Connect. Promote. Sell.</div>
+      <div style="font-weight:900; font-size:19px; color:#0a1e3f; line-height:1; letter-spacing:-.3px;">JARVIS DIGITAL</div>
+      <div style="font-size:10.5px; font-weight:700; color:#0a1e3f; letter-spacing:.3px;">Connect. Promote. Sell.</div>
     </div>
   </div>
-  <div style="flex:1; max-width:520px; display:flex; margin:0 12px;">
-    <input id="searchInput" placeholder="Search for products..." style="flex:1; padding:12px 14px; border:1px solid #d1d5db; border-right:none; border-radius:8px 0 0 8px; outline:none; font-size:13px;" />
-    <button id="searchBtn" style="background:#2563eb; color:white; border:none; padding:0 16px; border-radius:0 8px 8px 0; cursor:pointer;">🔍</button>
+  <div style="flex:1; max-width:520px; display:flex; height:40px;">
+    <input placeholder="Search for products..." style="flex:1; border:1px solid #d1d5db; border-right:0; border-radius:8px 0 0 8px; padding:0 14px; font-size:13px; outline:none;" />
+    <button style="background:#1a56db; width:52px; border:none; border-radius:0 8px 8px 0; color:#fff; font-size:16px; cursor:pointer;">⌕</button>
   </div>
-  <div style="display:flex; align-items:center; gap:18px; font-size:13px;">
-    <a href="#login" style="text-decoration:none; color:#0a1f44; display:flex; align-items:center; gap:6px; font-weight:600;">👤 Login / Register</a>
-    <a href="#cart" style="text-decoration:none; color:#0a1f44; display:flex; align-items:center; gap:4px; font-weight:600; position:relative;">🛒 Cart <span id="cart-count" style="position:absolute; top:-8px; right:-10px; background:#ef4444; color:white; font-size:10px; padding:1px 5px; border-radius:10px;">0</span></a>
-    <span style="cursor:pointer;">🌙</span>
-  </div>
-</div>
-
-<!-- NAV -->
-<div style="background:#0e3a8a; color:white; display:flex; align-items:center; padding:0 4%; gap:22px; font-size:13px; font-weight:600; flex-wrap:wrap;">
-  <div style="background:#facc15; color:#111; padding:10px 14px; border-radius:6px; display:flex; align-items:center; gap:6px; margin:8px 0; cursor:pointer;">☰ All Categories ▾</div>
-  <a href="#" style="color:#facc15; text-decoration:none; display:flex; gap:6px; align-items:center;">🏠 Home</a>
-  <a href="#" style="color:white; text-decoration:none; display:flex; gap:6px; align-items:center; opacity:.9;">👜 Marketplace</a>
-  <a href="#dashboard" style="color:white; text-decoration:none; display:flex; gap:6px; align-items:center; opacity:.9;">🏷️ Sell a Product</a>
-  <a href="#" style="color:white; text-decoration:none; display:flex; gap:6px; align-items:center; opacity:.9;">🤝 Affiliate</a>
-  <span style="opacity:.3;">|</span>
-  <a href="#" style="color:white; text-decoration:none; opacity:.8;">About</a>
-  <a href="#" style="color:white; text-decoration:none; opacity:.8;">Contact</a>
-</div>
-
-<!-- HERO -->
-<div style="position:relative; background:white; margin:0; overflow:hidden;">
-  <div style="display:flex; min-height:380px; flex-wrap:wrap;">
-    <div style="flex:1; min-width:320px; padding:46px 4% 30px; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(90deg, white 0%, #f8fafc 100%);">
-      <h1 style="font-size:clamp(36px,4.5vw,52px); font-weight:900; line-height:.95; color:#0a1f44; margin:0;">Shop Smart.<br><span style="color:#2563eb;">Live Better.</span></h1>
-      <p style="margin:14px 0 22px; color:#334155; font-size:14.5px; max-width:420px; line-height:1.5;">Discover amazing products at the best prices from trusted sellers around the world.</p>
-      <button id="shopNowBtn" style="background:#facc15; color:#111; border:none; padding:12px 22px; border-radius:24px; font-weight:800; font-size:14px; cursor:pointer; width:fit-content; display:flex; align-items:center; gap:8px;">Shop Now →</button>
-      <div style="display:flex; gap:8px; margin-top:22px;"><span style="width:26px; height:8px; background:white; border:1px solid #ddd; border-radius:10px; background:#0a1f44;"></span><span style="width:8px; height:8px; background:#cbd5e1; border-radius:50%;"></span><span style="width:8px; height:8px; background:#cbd5e1; border-radius:50%;"></span></div>
-    </div>
-    <div style="flex:1.2; min-width:360px; position:relative; background:url('https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=1200') center/cover; min-height:380px;">
-      <div style="position:absolute; right:12px; top:18px; background:#facc15; color:#111; font-weight:900; font-size:20px; padding:18px 18px; border-radius:50%; transform:rotate(6deg); text-align:center; line-height:1.1; box-shadow:0 6px 20px rgba(0,0,0,.2); width:110px; height:110px; display:flex; align-items:center; justify-content:center;">Great Deals Everyday!</div>
-      <img src="https://i.ibb.co/5XyG8wK0/african-girl.png" onerror="this.style.display='none'" style="position:absolute; bottom:0; right:20%; height:100%; object-fit:contain;" />
-      <!-- fallback girl using unsplash if above fails -->
-      <div style="position:absolute; inset:0; display:flex; justify-content:flex-end; align-items:end; padding-right:4%;">
-        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600" style="height:94%; object-fit:contain; border-radius:0; mask-image: linear-gradient(to bottom, black 80%, transparent);" />
-      </div>
-    </div>
+  <div style="display:flex; align-items:center; gap:18px; font-size:13px; font-weight:600; color:#0a1e3f;">
+    <a href="#login" style="text-decoration:none; color:#0a1e3f; display:flex; align-items:center; gap:6px;">👤 Login / Register</a>
+    <a href="#cart" style="text-decoration:none; color:#0a1e3f; display:flex; align-items:center; gap:4px;">🛒 Cart <b id="cart-count" style="background:#ff3b30; color:#fff; font-size:10px; padding:1px 5px; border-radius:10px; margin-left:2px;">2</b></a>
+    <span>🌙</span>
   </div>
 </div>
 
-<!-- SHOP BY CATEGORY -->
-<div style="background:white; padding:18px 4% 10px;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <h2 style="font-size:18px; font-weight:800; color:#0a1f44; margin:0;">Shop by Category</h2>
-    <a id="viewCats" style="color:#2563eb; font-size:12px; font-weight:700; text-decoration:none; cursor:pointer;">View All Categories →</a>
+<!-- NAVBAR EXACT BLUE -->
+<div style="background:#103a8a; display:flex; align-items:center; gap:24px; padding:0 3.5%; height:46px; color:#fff; font-size:13px; font-weight:600; overflow-x:auto;">
+  <div style="background:#fbd207; color:#000; height:32px; padding:0 14px; border-radius:6px; display:flex; align-items:center; gap:8px; font-weight:800; white-space:nowrap;">☰ All Categories ▾</div>
+  <span style="color:#fbd207; display:flex; align-items:center; gap:6px; white-space:nowrap;">🏠 Home</span>
+  <span style="opacity:.9; display:flex; align-items:center; gap:6px; white-space:nowrap;">🛍️ Marketplace</span>
+  <a href="#dashboard" style="color:#fff; text-decoration:none; opacity:.9; white-space:nowrap;">🏷️ Sell a Product</a>
+  <span style="opacity:.9; white-space:nowrap;">🤝 Affiliate</span>
+  <span style="opacity:.4;">|</span>
+  <span style="opacity:.85;">About</span>
+  <span style="opacity:.85;">Contact</span>
+</div>
+
+<!-- HERO EXACT LIKE SCREENSHOT -->
+<div style="background:#fff; display:flex; flex-wrap:wrap; min-height:400px; position:relative; overflow:hidden;">
+  <div style="flex:1; min-width:340px; padding:48px 3.5% 28px;">
+    <h1 style="font-size:48px; font-weight:900; line-height:.95; margin:0; color:#0a1e3f;">Shop Smart.<br><span style="color:#1a56db;">Live Better.</span></h1>
+    <p style="color:#334155; font-size:14px; max-width:400px; line-height:1.5; margin:16px 0 22px;">Discover amazing products at the best prices from trusted sellers around the world.</p>
+    <a href="#products" style="background:#fbd207; color:#000; padding:12px 22px; border-radius:28px; font-weight:800; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">Shop Now →</a>
+    <div style="display:flex; gap:8px; margin-top:28px;"><div style="width:22px; height:8px; background:#0a1e3f; border-radius:10px;"></div><div style="width:8px; height:8px; background:#cbd5e1; border-radius:50%;"></div><div style="width:8px; height:8px; background:#cbd5e1; border-radius:50%;"></div></div>
   </div>
-  <div id="categoryGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:12px;">
+  <div style="flex:1.3; min-width:360px; position:relative; background:#f8fafc;">
+    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=900" style="width:100%; height:100%; object-fit:cover; opacity:.2; position:absolute; inset:0;" />
+    <div style="position:absolute; right:22px; top:22px; background:#fbd207; color:#000; font-weight:900; font-size:19px; line-height:1.05; padding:18px; border-radius:50%; width:108px; height:108px; display:flex; align-items:center; justify-content:center; text-align:center; transform:rotate(8deg); box-shadow:0 8px 24px rgba(0,0,0,.18); z-index:3;">Great Deals Everyday!</div>
+    <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600" style="position:absolute; right:8%; bottom:0; height:96%; z-index:2; object-fit:contain;" />
   </div>
 </div>
 
-<!-- FEATURED PRODUCTS -->
-<div style="background:white; padding:18px 4% 10px; margin-top:8px;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <h2 style="font-size:18px; font-weight:800; color:#0a1f44; margin:0; display:flex; align-items:center; gap:6px;">⭐ Featured Products</h2>
-    <a id="viewAllBtn" style="color:#2563eb; font-size:12px; font-weight:700; cursor:pointer; text-decoration:none;">View All Products →</a>
+<!-- SHOP BY CATEGORY EXACT -->
+<div style="background:#fff; padding:22px 3.5% 14px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+    <h2 style="font-size:18px; font-weight:800; color:#0a1e3f; margin:0;">Shop by Category</h2>
+    <a style="color:#1a56db; font-size:12px; font-weight:700; text-decoration:none;">View All Categories →</a>
   </div>
-  <div id="products" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px;">
+  <div style="display:grid; grid-template-columns:repeat(8,1fr); gap:12px;">
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1588872657576-7efd1f1555ed?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Electronics</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Beauty &<br>Skincare</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Phones &<br>Accessories</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Fashion &<br>Apparel</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Home & Kitchen</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Books &<br>eBooks</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1579952363873-27f3bfad9c0d?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Sports &<br>Fitness</div></div>
+    <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:12px 4px; text-align:center;"><img src="https://images.unsplash.com/photo-1578849278619-e73505e9610f?w=200" style="height:48px; object-fit:contain;" /><div style="font-size:11px; font-weight:700; margin-top:8px; color:#0a1e3f;">Automotive</div></div>
   </div>
 </div>
 
-<!-- TWO BANNERS -->
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:18px 4%; background:white;">
-  <div style="background:linear-gradient(90deg,#0e3a8a,#2563eb); color:white; border-radius:12px; padding:18px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-    <div style="display:flex; gap:12px; align-items:start;">
-      <div style="background:white; color:#0e3a8a; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px;">🛡️</div>
-      <div><div style="font-weight:800; font-size:16px;">Secure & Reliable</div><div style="font-size:12px; opacity:.9; max-width:220px; margin:4px 0 10px;">Your payments and data are always protected.</div><button style="background:#facc15; border:none; padding:8px 14px; border-radius:20px; font-weight:800; font-size:12px; cursor:pointer;">Shop with Confidence →</button></div>
-    </div>
-    <div style="font-size:54px; opacity:.9;">💳🔒</div>
+<!-- FEATURED PRODUCTS - WILL BE FILLED BY JS -->
+<div style="background:#fff; padding:18px 3.5%;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+    <h2 style="font-size:18px; font-weight:800; color:#0a1e3f; margin:0; display:flex; align-items:center; gap:6px;">⭐ Featured Products</h2>
+    <a style="color:#1a56db; font-size:12px; font-weight:700;">View All Products →</a>
   </div>
-  <div style="background:#facc15; color:#111; border-radius:12px; padding:18px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-    <div><div style="font-weight:900; font-size:16px; display:flex; align-items:center; gap:8px;">🚚 Fast Delivery</div><div style="font-size:12px; max-width:220px; margin:4px 0 10px; font-weight:600;">Get your order anywhere in Cameroon.</div><button style="background:#0a1f44; color:white; border:none; padding:8px 14px; border-radius:20px; font-weight:800; font-size:12px; cursor:pointer;">Order Now →</button></div>
-    <div style="display:flex; align-items:center; gap:8px;"><div style="font-size:48px;">📦</div><div style="font-size:36px;">👍</div></div>
+  <div id="products" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(188px,1fr)); gap:14px;"></div>
+</div>
+
+<!-- BANNERS -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:0 3.5% 14px; background:#fff;">
+  <div style="background:linear-gradient(90deg,#0d3fb8,#1a56db); border-radius:14px; padding:18px 18px; display:flex; justify-content:space-between; align-items:center; color:#fff;">
+    <div style="display:flex; gap:12px;"><div style="width:44px; height:44px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0d3fb8; font-size:22px;">🛡️</div><div><div style="font-weight:800; font-size:16px;">Secure & Reliable</div><div style="font-size:12px; opacity:.9; margin:4px 0 10px; max-width:200px;">Your payments and data are always protected.</div><div style="background:#fbd207; color:#000; padding:7px 12px; border-radius:20px; font-weight:800; font-size:11px; display:inline-block;">Shop with Confidence →</div></div></div><div style="font-size:52px;">💳</div>
+  </div>
+  <div style="background:#fbd207; border-radius:14px; padding:18px 18px; display:flex; justify-content:space-between; align-items:center; color:#000;">
+    <div><div style="font-weight:900; font-size:16px;">🚚 Fast Delivery</div><div style="font-size:12px; font-weight:600; margin:4px 0 10px;">Get your order anywhere in Cameroon.</div><div style="background:#0a1e3f; color:#fff; padding:7px 12px; border-radius:20px; font-weight:800; font-size:11px; display:inline-block;">Order Now →</div></div><div style="display:flex; gap:6px; align-items:center; font-size:42px;">📦 👍</div>
   </div>
 </div>
 
 <!-- FEATURES STRIP -->
-<div style="background:white; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; border-top:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb; padding:0; margin:0 4%;">
-  <div style="display:flex; gap:10px; align-items:center; padding:16px 12px;"><div style="font-size:22px; color:#0a1f44;">🎧</div><div><div style="font-weight:800; font-size:12px; color:#0a1f44;">24/7 Support</div><div style="font-size:11px; opacity:.7;">We are always here to help.</div></div></div>
-  <div style="display:flex; gap:10px; align-items:center; padding:16px 12px; border-left:1px solid #e5e7eb;"><div style="font-size:22px;">🔄</div><div><div style="font-weight:800; font-size:12px; color:#0a1f44;">Easy Returns</div><div style="font-size:11px; opacity:.7;">Hassle-free returns.</div></div></div>
-  <div style="display:flex; gap:10px; align-items:center; padding:16px 12px; border-left:1px solid #e5e7eb;"><div style="font-size:22px;">✔️</div><div><div style="font-weight:800; font-size:12px; color:#0a1f44;">Trusted Sellers</div><div style="font-size:11px; opacity:.7;">Shop with confidence.</div></div></div>
-  <div style="display:flex; gap:10px; align-items:center; padding:16px 12px; border-left:1px solid #e5e7eb;"><div style="font-size:22px;">🎁</div><div><div style="font-weight:800; font-size:12px; color:#0a1f44;">Special Offers</div><div style="font-size:11px; opacity:.7;">Save more every day.</div></div></div>
+<div style="background:#fff; margin:0 3.5%; border:1px solid #eef2f7; border-left:0; border-right:0; display:grid; grid-template-columns:repeat(4,1fr);">
+  <div style="display:flex; gap:10px; align-items:center; padding:14px;"><span style="font-size:20px;">🎧</span><div><div style="font-weight:800; font-size:12px;">24/7 Support</div><div style="font-size:11px; opacity:.7;">We are always here to help.</div></div></div>
+  <div style="display:flex; gap:10px; align-items:center; padding:14px; border-left:1px solid #eef2f7;"><span>🔄</span><div><div style="font-weight:800; font-size:12px;">Easy Returns</div><div style="font-size:11px; opacity:.7;">Hassle-free returns.</div></div></div>
+  <div style="display:flex; gap:10px; align-items:center; padding:14px; border-left:1px solid #eef2f7;"><span>✔️</span><div><div style="font-weight:800; font-size:12px;">Trusted Sellers</div><div style="font-size:11px; opacity:.7;">Shop with confidence.</div></div></div>
+  <div style="display:flex; gap:10px; align-items:center; padding:14px; border-left:1px solid #eef2f7;"><span>🎁</span><div><div style="font-weight:800; font-size:12px;">Special Offers</div><div style="font-size:11px; opacity:.7;">Save more every day.</div></div></div>
 </div>
 
 <!-- NEWSLETTER -->
-<div style="margin:16px 4%; background:#0a1f44; color:white; border-radius:12px; display:flex; align-items:center; justify-content:space-between; padding:16px 18px; gap:12px; flex-wrap:wrap;">
-  <div style="display:flex; gap:12px; align-items:center;"><div style="font-size:28px;">✉️</div><div><div style="font-weight:800; font-size:14px;">Subscribe to Our Newsletter</div><div style="font-size:11px; opacity:.8;">Get the latest products, offers and updates delivered to your inbox.</div></div></div>
-  <div style="display:flex; gap:8px; align-items:center;"><input id="newsEmail" placeholder="Enter your email address" style="padding:10px 12px; border-radius:6px; border:none; min-width:220px; font-size:12px;" /><button id="subscribeBtn" style="background:#facc15; border:none; padding:10px 16px; border-radius:6px; font-weight:800; font-size:12px; cursor:pointer;">Subscribe</button><span style="font-size:24px; margin-left:8px;">✈️</span></div>
+<div style="margin:14px 3.5%; background:#0a1e3f; border-radius:12px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+  <div style="display:flex; gap:12px; align-items:center; color:#fff;"><div style="font-size:26px;">✉️</div><div><div style="font-weight:800; font-size:14px;">Subscribe to Our Newsletter</div><div style="font-size:11px; opacity:.8;">Get the latest products, offers and updates delivered to your inbox.</div></div></div>
+  <div style="display:flex; gap:8px;"><input placeholder="Enter your email address" style="padding:10px 12px; border-radius:6px; border:none; width:240px; font-size:12px;" /><button style="background:#fbd207; border:none; padding:10px 14px; border-radius:6px; font-weight:800; font-size:12px;">Subscribe</button></div>
 </div>
 
 <!-- FOOTER -->
-<div style="background:#081938; color:white; padding:24px 4% 12px; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr; gap:18px; font-size:12px;">
-  <div>
-    <div style="display:flex; gap:8px; align-items:center; font-weight:900; font-size:18px;"><span style="font-size:26px;">🛒</span> JARVIS DIGITAL<br><span style="font-size:10px; font-weight:600; letter-spacing:.5px;">Connect. Promote. Sell.</span></div>
-    <div style="opacity:.7; margin:10px 0 12px; line-height:1.5;">Your trusted online marketplace in Cameroon and beyond.</div>
-    <div style="display:flex; gap:8px;"><span style="background:#1877f2; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">f</span><span style="background:#25d366; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">w</span><span style="background:red; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">▶</span><span style="background:black; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">♪</span></div>
-  </div>
-  <div><div style="font-weight:800; margin-bottom:10px;">Quick Links</div><div style="opacity:.8; line-height:1.9;"><a style="color:white; text-decoration:none;">Home</a><br>Marketplace<br>Sell a Product<br>Affiliate<br>About Us<br>Contact Us</div></div>
-  <div><div style="font-weight:800; margin-bottom:10px;">Customer Support</div><div style="opacity:.8; line-height:1.9;">FAQs<br>Shipping Info<br>Return Policy<br>Privacy Policy<br>Terms & Conditions</div></div>
-  <div><div style="font-weight:800; margin-bottom:10px;">Contact Us</div><div style="opacity:.8; line-height:1.9;">📞 +237 6 12 34 56 78<br>✉️ support@jarvisdigital.cm<br>📍 Yaoundé, Cameroon</div></div>
-  <div style="font-style:italic; color:#facc15; font-weight:700; font-size:14px;">Shop Smart,<br>Grow with JARVIS DIGITAL<br><span style="display:inline-block; width:60px; height:3px; background:#facc15; border-radius:10px; margin-top:4px;"></span></div>
+<div style="background:#07132e; color:#fff; padding:22px 3.5%; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; gap:16px; font-size:12px;">
+  <div><div style="font-weight:900; font-size:17px; display:flex; gap:8px; align-items:center;">🛒 JARVIS DIGITAL</div><div style="font-size:10px; opacity:.8;">Connect. Promote. Sell.</div><div style="opacity:.6; margin:10px 0; line-height:1.4;">Your trusted online marketplace in Cameroon and beyond.</div></div>
+  <div><b>Quick Links</b><div style="opacity:.7; line-height:1.8; margin-top:8px;">Home<br>Marketplace<br>Sell a Product<br>Affiliate<br>About Us<br>Contact Us</div></div>
+  <div><b>Customer Support</b><div style="opacity:.7; line-height:1.8; margin-top:8px;">FAQs<br>Shipping Info<br>Return Policy<br>Privacy Policy<br>Terms & Conditions</div></div>
+  <div><b>Contact Us</b><div style="opacity:.7; line-height:1.8; margin-top:8px;">📞 +237 6 12 34 56 78<br>✉️ support@jarvisdigital.cm<br>📍 Yaoundé, Cameroon</div></div>
+  <div style="color:#fbd207; font-style:italic; font-weight:700;">Shop Smart,<br>Grow with JARVIS DIGITAL!</div>
 </div>
-<div style="background:#081938; border-top:1px solid rgba(255,255,255,.1); color:white; display:flex; justify-content:space-between; padding:10px 4%; font-size:11px; opacity:.7;">
-  <div>© 2025 JARVIS DIGITAL. All rights reserved.</div>
-  <div>Designed with ❤️ in Cameroon 🇨🇲</div>
-</div>
+<div style="background:#07132e; border-top:1px solid rgba(255,255,255,.08); color:#fff; display:flex; justify-content:space-between; padding:10px 3.5%; font-size:11px; opacity:.6;"><span>© 2025 JARVIS DIGITAL. All rights reserved.</span><span>Designed with ❤️ in Cameroon 🇨🇲</span></div>
 
 </div>
 `
 
-let cachedProducts: any[] = [];
-
 export function initHome(){
-  const productsEl = document.getElementById('products')!
-  const catEl = document.getElementById('categoryGrid')!
-
-  const categories = [
-    {name:'Electronics', icon:'💻', id:'electronics'},
-    {name:'Beauty & Skincare', icon:'🧴', id:'beauty'},
-    {name:'Phones & Accessories', icon:'📱', id:'phones'},
-    {name:'Fashion Apparel', icon:'👕', id:'fashion'},
-    {name:'Home & Kitchen', icon:'🍳', id:'home'},
-    {name:'Books & eBooks', icon:'📚', id:'books'},
-    {name:'Sports & Fitness', icon:'⚽', id:'sports'},
-    {name:'Automotive', icon:'🛞', id:'auto'},
-  ]
-
-  catEl.innerHTML = categories.map(c=>`
-    <div class="cat-card" data-cat="${c.id}" style="background:#f8fafc; border:1px solid #eef2ff; border-radius:12px; padding:14px 6px; text-align:center; cursor:pointer; transition:.2s;">
-      <div style="font-size:32px;">${c.icon}</div>
-      <div style="font-size:11px; font-weight:700; color:#0a1f44; margin-top:6px; line-height:1.2;">${c.name}</div>
-    </div>
-  `).join('')
-
-  function renderProducts(products:any[]){
-    if(!products.length){ productsEl.innerHTML = "<p style='opacity:.6; font-size:13px;'>No products found</p>"; return }
-    productsEl.innerHTML = products.map(p=>`
-      <div class="product-card" data-id="${p.id}" style="background:white; border:1px solid #eef2ff; border-radius:12px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column;">
-        <div style="background:#f8fafc; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-          <img src="${p.image}" style="width:90%; height:90%; object-fit:contain;" />
-        </div>
-        <div style="padding:10px 10px 12px;">
-          <div style="font-size:12px; font-weight:600; color:#0a1f44; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
-          <div style="font-weight:900; color:#2563eb; font-size:14px; margin:4px 0;">${p.price.toLocaleString()} FCFA</div>
-          <div style="display:flex; align-items:center; gap:4px; font-size:11px; color:#334155;"><span style="color:#f59e0b;">★</span> ${p.rating||'4.6'} (${p.reviews||'60'})</div>
-          <button class="add-cart-btn" data-id="${p.id}" style="margin-top:8px; width:100%; background:#2563eb; color:white; border:none; padding:8px; border-radius:6px; font-weight:700; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">🛒 Add to Cart</button>
-        </div>
-      </div>
-    `).join('')
-  }
-
-  async function loadProducts(cat?:string){
-    productsEl.innerHTML = Array(5).fill(0).map(()=>`<div style="background:white; border-radius:12px; height:220px; border:1px solid #eef2ff;"></div>`).join('')
+  const el=document.getElementById('products')!
+  async function load(){
     try{
-      let products:any[]=[]
-      try{
-        const r=await fetch('/api/products')
-        if(r.ok) products=await r.json()
-      }catch{}
-      if(!products.length){
-        const r=await fetch('/products.json')
-        if(r.ok) products=await r.json()
-      }
-      // normalize price to FCFA display
-      products = products.map((p:any)=>({...p, price: p.price < 5000 ? p.price*650 : p.price, rating: p.rating|| (4 + Math.random()).toFixed(1), reviews: p.reviews|| Math.floor(40+Math.random()*100)}))
-      cachedProducts=products
-      let filtered=products
-      if(cat) filtered=products.filter((p:any)=> (p.category||'').toLowerCase().includes(cat.toLowerCase()))
-      renderProducts(filtered)
-    }catch(e:any){
-      productsEl.innerHTML = "<p style='color:red; font-size:12px;'>Failed to load</p>"
-    }
+      const r=await fetch('/products.json')
+      const products=await r.json()
+      el.innerHTML=products.map((p:any)=>`
+        <div style="background:#fff; border:1px solid #eef2f7; border-radius:12px; overflow:hidden;">
+          <div style="background:#f8fafc; height:160px; display:flex; align-items:center; justify-content:center;"><img src="${p.image}" style="width:88%; height:88%; object-fit:contain;" /></div>
+          <div style="padding:10px;">
+            <div style="font-size:12px; font-weight:600; color:#0a1e3f; height:30px; overflow:hidden;">${p.name}</div>
+            <div style="font-weight:900; color:#1a56db; font-size:15px; margin:4px 0;">${Number(p.price).toLocaleString()} FCFA</div>
+            <div style="font-size:11px; color:#475569;"><span style="color:#f59e0b;">★</span> ${p.rating} (${p.reviews})</div>
+            <button class="add-cart" data-id="${p.id}" style="margin-top:8px; width:100%; background:#1a56db; color:#fff; border:none; padding:8px; border-radius:6px; font-weight:700; font-size:12px; cursor:pointer;">🛒 Add to Cart</button>
+          </div>
+        </div>
+      `).join('')
+      el.addEventListener('click',(e)=>{
+        const btn=(e.target as HTMLElement).closest('.add-cart') as HTMLElement
+        if(btn){
+          const id=btn.getAttribute('data-id')
+          const cart=JSON.parse(localStorage.getItem('cart')||'[]')
+          const prod=products.find((x:any)=>x.id==id)
+          const ex=cart.find((x:any)=>x.id==id)
+          if(ex) ex.qty++; else cart.push({...prod,qty:1})
+          localStorage.setItem('cart',JSON.stringify(cart))
+          const c=document.getElementById('cart-count'); if(c) c.textContent=cart.reduce((s:any,i:any)=>s+i.qty,0)
+          alert('Added to cart!')
+        }
+      })
+    }catch(e){ el.innerHTML='Failed to load products' }
   }
-
-  loadProducts()
-
-  catEl.addEventListener('click',(e)=>{
-    const card=(e.target as HTMLElement).closest('.cat-card') as HTMLElement
-    if(card?.dataset.cat) loadProducts(card.dataset.cat)
-  })
-
-  document.getElementById('viewAllBtn')?.addEventListener('click',()=>loadProducts())
-  document.getElementById('viewCats')?.addEventListener('click',()=>loadProducts())
-  document.getElementById('shopNowBtn')?.addEventListener('click',()=>{ document.getElementById('products')?.scrollIntoView({behavior:'smooth'}) })
-  document.getElementById('searchBtn')?.addEventListener('click',()=>{
-    const q=(document.getElementById('searchInput') as HTMLInputElement).value.toLowerCase()
-    if(!q) return loadProducts()
-    const filtered=cachedProducts.filter(p=>p.name.toLowerCase().includes(q))
-    renderProducts(filtered)
-  })
+  load()
 }
