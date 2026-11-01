@@ -44,7 +44,7 @@ export function initHome() {
 
     function loadProducts(category?: string) {
     productsEl.innerHTML = "<p>Loading...</p>"
-    const url = category ? `http://"/products.json"?category=${category}` : `http://api/pro"/products.json"ducts`
+    const url = category ? `http://"/products.json"?category=${category}` : `/products.json`
     console.log("Fetching:", url);
     fetch(url)
       .then(r => {
