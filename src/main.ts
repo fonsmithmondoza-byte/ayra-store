@@ -2,7 +2,7 @@ import './style.css'
 import { Header, updateCartCount } from './components/Header'
 import { Home, initHome } from './pages/Home'
 import { ProductDetail, initProductDetail } from './pages/ProductDetail'
-import { CartPage, initCart } from './pages/Cart'
+import { Cart as CartPage, initCart } from './pages/Cart'
 import { CheckoutPage, SuccessPage, initCheckout, initSuccess } from './pages/Checkout'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
