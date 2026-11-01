@@ -1,117 +1,125 @@
-export const CheckoutPage = `
-  <div id="checkout-page" style="padding:40px 4%; max-width:1100px; margin:0 auto; display:flex; gap:60px; flex-wrap:wrap;">
-    <div style="flex:2; min-width:320px;">
-      <h2 style="font-weight:300; font-size:32px; margin-bottom:8px;">Checkout</h2>
-      <p style="opacity:.6; font-size:13px; margin-bottom:32px; letter-spacing:.5px;">Complete your order — demo payment, no real charge</p>
+export const Checkout = `
+  <div style="max-width:1100px; margin:0 auto; padding:50px 4%; display:flex; gap:60px; flex-wrap:wrap;">
+    <!-- LEFT FORM -->
+    <div style="flex:1.2; min-width:340px;">
+      <h1 style="font-size:28px; font-weight:300; margin-bottom:32px;">Checkout</h1>
       
-      <div style="display:grid; gap:16px;">
-        <input id="c-name" placeholder="Full Name" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
-        <input id="c-email" placeholder="Email Address" type="email" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
-        <input id="c-address" placeholder="Shipping Address" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
-        <div style="display:flex; gap:12px;">
-          <input id="c-city" placeholder="City" style="flex:1; padding:14px; border:1px solid #ddd; font-size:13px;" />
-          <input id="c-zip" placeholder="ZIP / Postal" style="flex:1; padding:14px; border:1px solid #ddd; font-size:13px;" />
-        </div>
-        <div style="border-top:1px solid #eee; margin:12px 0;"></div>
-        <p style="font-size:12px; letter-spacing:2px;">PAYMENT</p>
-        <input id="c-card" placeholder="Card Number  4242 4242 4242 4242" style="padding:14px; border:1px solid #ddd; font-size:13px; letter-spacing:1px;" />
-        <div style="display:flex; gap:12px;">
-          <input placeholder="MM / YY" style="flex:1; padding:14px; border:1px solid #ddd; font-size:13px;" />
-          <input placeholder="CVC" style="flex:1; padding:14px; border:1px solid #ddd; font-size:13px;" />
-        </div>
-        <button id="payBtn" style="margin-top:12px; background:black; color:white; padding:16px; border:none; letter-spacing:2px; font-size:12px; cursor:pointer;">PAY NOW</button>
-        <button id="backToCartBtn" style="background:white; color:black; padding:14px; border:1px solid black; letter-spacing:1px; font-size:11px; cursor:pointer;">← BACK TO CART</button>
+      <div id="checkout-errors" style="display:none; background:#fff0f0; border:1px solid #ffcccc; padding:12px; font-size:12px; color:#a00; margin-bottom:20px;"></div>
+
+      <h3 style="font-size:11px; letter-spacing:2px; margin-bottom:16px;">CONTACT</h3>
+      <input id="email" placeholder="Email Address" style="width:100%; padding:14px; border:1px solid #ddd; margin-bottom:20px; font-size:13px;" />
+
+      <h3 style="font-size:11px; letter-spacing:2px; margin-bottom:16px;">SHIPPING ADDRESS</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <input id="firstName" placeholder="First Name" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
+        <input id="lastName" placeholder="Last Name" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
       </div>
+      <input id="address" placeholder="Address" style="width:100%; padding:14px; border:1px solid #ddd; margin-bottom:12px; font-size:13px;" />
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:28px;">
+        <input id="city" placeholder="City" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
+        <input id="zip" placeholder="ZIP" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
+        <input id="country" placeholder="Country" value="USA" style="padding:14px; border:1px solid #ddd; font-size:13px;" />
+      </div>
+
+      <div style="display:flex; gap:12px; margin-bottom:24px;">
+        <input id="coupon" placeholder="Discount code" style="flex:1; padding:14px; border:1px solid #ddd; font-size:12px; letter-spacing:1px;" />
+        <button id="applyCoupon" style="padding:14px 20px; border:1px solid black; background:white; font-size:11px; letter-spacing:1px; cursor:pointer;">APPLY</button>
+      </div>
+
+      <button id="payBtn" style="width:100%; background:black; color:white; padding:18px; border:none; letter-spacing:2px; font-size:12px; cursor:pointer;">PAY NOW • $<span id="payTotal">0</span></button>
+      <p style="text-align:center; font-size:10px; opacity:.4; margin-top:12px; letter-spacing:1px;">SECURE CHECKOUT • SSL ENCRYPTED</p>
     </div>
 
-    <div id="checkout-summary" style="flex:1; min-width:280px; background:#f9f9f9; padding:28px; height:fit-content; position:sticky; top:100px;">
+    <!-- RIGHT SUMMARY -->
+    <div style="flex:.8; min-width:300px; background:#fafafa; padding:28px; height:fit-content;">
+      <h3 style="font-size:11px; letter-spacing:2px; margin-bottom:20px;">ORDER SUMMARY</h3>
+      <div id="order-items"></div>
+      <div id="order-totals" style="border-top:1px solid #eee; margin-top:20px; padding-top:16px; font-size:13px;"></div>
     </div>
   </div>
 `
 
-export const SuccessPage = `
-  <div style="padding:80px 4%; text-align:center; min-height:70vh; max-width:600px; margin:0 auto;">
-    <div style="font-size:48px; margin-bottom:16px;">✓</div>
-    <h2 style="font-weight:300; font-size:32px; margin-bottom:12px;">Order Successful!</h2>
-    <p style="opacity:.6; font-size:14px; margin-bottom:8px;">Thank you for shopping with AYRA</p>
-    <p id="success-order-id" style="font-size:12px; letter-spacing:1px; opacity:.5; margin-bottom:32px;"></p>
-    <a href="#" id="continueSuccess" style="display:inline-block; background:black; color:white; padding:14px 32px; text-decoration:none; letter-spacing:1px; font-size:12px;">CONTINUE SHOPPING</a>
-  </div>
-`
+export function initCheckout(){
+  const cart: any[] = JSON.parse(localStorage.getItem('cart') || '[]')
+  const itemsEl = document.getElementById('order-items')!
+  const totalsEl = document.getElementById('order-totals')!
+  const payTotalEl = document.getElementById('payTotal')!
+  const errorsEl = document.getElementById('checkout-errors')!
 
-function showToast(msg: string) {
-  let t = document.getElementById('ayra-toast') as HTMLDivElement | null
-  if (!t) {
-    t = document.createElement('div')
-    t.id = 'ayra-toast'
-    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 28px;font-size:13px;letter-spacing:.5px;z-index:99999;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:opacity .3s;'
-    document.body.appendChild(t)
-  }
-  t.textContent = msg
-  t.style.opacity = '1'
-  t.style.display = 'block'
-  setTimeout(() => { if (t) t.style.opacity = '0' }, 3000)
-}
-
-export function initCheckout() {
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-  const total = cart.reduce((s:number, p:any) => s + p.price, 0)
-  const summary = document.getElementById('checkout-summary')!
-
-  if (cart.length === 0) {
+  if(cart.length===0){
     window.location.hash = '#cart'
     return
   }
 
-  summary.innerHTML = `
-    <h3 style="font-size:14px; letter-spacing:2px; margin-bottom:20px;">ORDER SUMMARY</h3>
-    <div style="display:grid; gap:12px; max-height:300px; overflow:auto; margin-bottom:16px;">
-      ${cart.map((p:any) => `
-        <div style="display:flex; gap:12px; font-size:12px;">
-          <img src="${p.image}" style="width:50px; height:60px; object-fit:cover;" />
-          <div style="flex:1;"><p>${p.name}</p><p style="opacity:.6;">$${p.price}</p></div>
+  let discount = 0
+  let couponApplied = false
+
+  function render(){
+    const subtotal = cart.reduce((s:any,i:any)=> s + i.price * (i.qty||1), 0)
+    const shipping = subtotal > 75 ? 0 : 8
+    const total = Math.max(0, subtotal + shipping - discount)
+
+    itemsEl.innerHTML = cart.map((i:any)=>`
+      <div style="display:flex; gap:12px; margin-bottom:16px;">
+        <div style="width:56px; height:70px; background:#f0f0f0; position:relative;">
+          <img src="${i.image}" style="width:100%; height:100%; object-fit:cover;" />
+          <span style="position:absolute; top:-6px; right:-6px; background:black; color:white; font-size:9px; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;">${i.qty||1}</span>
         </div>
-      `).join('')}
-    </div>
-    <div style="border-top:1px solid #ddd; margin:16px 0;"></div>
-    <div style="display:flex; justify-content:space-between; font-size:13px; opacity:.7; margin-bottom:8px;"><span>Subtotal</span><span>$${total}</span></div>
-    <div style="display:flex; justify-content:space-between; font-size:13px; opacity:.7; margin-bottom:16px;"><span>Shipping</span><span>Free</span></div>
-    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:16px;"><span>Total</span><span>$${total}</span></div>
-  `
+        <div style="flex:1;">
+          <p style="font-size:12px;">${i.name}</p>
+          <p style="font-size:10px; opacity:.5; margin-top:4px;">${i.selectedSize?`Size: ${i.selectedSize}`:''} ${i.selectedColor?`• ${i.selectedColor}`:''}</p>
+        </div>
+        <p style="font-size:12px; font-weight:600;">$${i.price * (i.qty||1)}</p>
+      </div>
+    `).join('')
 
-  document.getElementById('backToCartBtn')!.addEventListener('click', () => window.location.hash = '#cart')
+    totalsEl.innerHTML = `
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px; opacity:.7;"><span>Subtotal</span><span>$${subtotal}</span></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px; opacity:.7;"><span>Shipping</span><span>${shipping===0?'FREE':`$${shipping}`}</span></div>
+      ${discount>0?`<div style="display:flex; justify-content:space-between; margin-bottom:8px; color:green;"><span>Discount (AYRA10)</span><span>-$${discount}</span></div>`:''}
+      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:15px; margin-top:12px; padding-top:12px; border-top:1px solid #eee;"><span>Total</span><span>$${total}</span></div>
+    `
+    payTotalEl.textContent = String(total)
+  }
 
-  document.getElementById('payBtn')!.addEventListener('click', () => {
-    const name = (document.getElementById('c-name') as HTMLInputElement).value
-    const email = (document.getElementById('c-email') as HTMLInputElement).value
-    const address = (document.getElementById('c-address') as HTMLInputElement).value
+  render()
 
-    if (!name || !email || !address) {
-      showToast('Please fill Name, Email, and Address')
+  document.getElementById('applyCoupon')?.addEventListener('click', ()=>{
+    const code = (document.getElementById('coupon') as HTMLInputElement).value.trim().toUpperCase()
+    if(code==='AYRA10' && !couponApplied){
+      const subtotal = cart.reduce((s:any,i:any)=> s + i.price * (i.qty||1), 0)
+      discount = Math.round(subtotal * 0.1)
+      couponApplied = true
+      render()
+      errorsEl.style.display='block'; errorsEl.style.background='#f0fff0'; errorsEl.style.borderColor='#b2e6b2'; errorsEl.style.color='#1a7a1a'
+      errorsEl.textContent = '✓ AYRA10 applied - 10% off'
+    } else if(couponApplied){
+      errorsEl.style.display='block'; errorsEl.textContent='Coupon already applied'
+    } else {
+      errorsEl.style.display='block'; errorsEl.style.background='#fff0f0'; errorsEl.style.borderColor='#ffcccc'; errorsEl.style.color='#a00'
+      errorsEl.textContent='Invalid coupon. Try AYRA10'
+    }
+  })
+
+  document.getElementById('payBtn')?.addEventListener('click', ()=>{
+    const email = (document.getElementById('email') as HTMLInputElement).value
+    const fn = (document.getElementById('firstName') as HTMLInputElement).value
+    const addr = (document.getElementById('address') as HTMLInputElement).value
+    const city = (document.getElementById('city') as HTMLInputElement).value
+
+    if(!email || !fn || !addr || !city){
+      errorsEl.style.display='block'; errorsEl.style.background='#fff0f0'; errorsEl.style.borderColor='#ffcccc'; errorsEl.style.color='#a00'
+      errorsEl.textContent='Please fill email, first name, address, and city.'
       return
     }
 
-    // Fake payment delay
-    const btn = document.getElementById('payBtn')!
+    // Simulate success
+    const btn = document.getElementById('payBtn') as HTMLButtonElement
     btn.textContent = 'PROCESSING...'
-    ;(btn as HTMLButtonElement).disabled = true
-
-    setTimeout(() => {
-      const orderId = 'AYRA-' + Math.floor(Math.random() * 900000 + 100000)
-      localStorage.setItem('lastOrderId', orderId)
-      localStorage.setItem('cart', '[]')
+    btn.disabled = true
+    setTimeout(()=>{
+      localStorage.removeItem('cart')
       window.location.hash = '#success'
     }, 1200)
-  })
-}
-
-export function initSuccess() {
-  const orderId = localStorage.getItem('lastOrderId') || 'AYRA-000000'
-  const el = document.getElementById('success-order-id')
-  if (el) el.textContent = `Order ID: ${orderId} • A confirmation email has been sent`
-
-  document.getElementById('continueSuccess')!.addEventListener('click', (e) => {
-    e.preventDefault()
-    window.location.hash = ''
   })
 }
