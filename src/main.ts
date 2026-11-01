@@ -1,11 +1,97 @@
 import './style.css'
-import { Header, updateCartCount } from './components/Header'
 import { Home, initHome } from './pages/Home'
-import { ProductDetail, initProductDetail } from './pages/ProductDetail'
-import { Cart as CartPage, initCart } from './pages/Cart'
-import { Checkout, initCheckout } from './pages/Checkout'
 import { AuthPage, initAuth } from './pages/Auth'
 import { DashboardPage, initDashboard } from './pages/Dashboard'
+
+const Checkout = `
+  <main style="max-width:600px; margin:0 auto; padding:48px 4%;">
+    <h1>Checkout</h1>
+    <form id="checkout-form">
+      <label style="display:block; margin:16px 0;">Name<input name="name" autocomplete="name" required style="display:block; width:100%; padding:12px; box-sizing:border-box;"></label>
+      <label style="display:block; margin:16px 0;">Email<input name="email" type="email" autocomplete="email" required style="display:block; width:100%; padding:12px; box-sizing:border-box;"></label>
+      <label style="display:block; margin:16px 0;">Address<input name="address" autocomplete="street-address" required style="display:block; width:100%; padding:12px; box-sizing:border-box;"></label>
+      <button type="submit" style="background:black; color:white; padding:14px 28px; border:0; cursor:pointer;">PLACE ORDER</button>
+    </form>
+  </main>
+`
+
+function initCheckout() {
+  document.getElementById('checkout-form')?.addEventListener('submit', (event) => {
+    event.preventDefault()
+    try {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+      if (!Array.isArray(cart) || cart.length === 0) {
+        window.location.hash = '#cart'
+        return
+      }
+      sessionStorage.setItem('lastCart', JSON.stringify(cart))
+      localStorage.removeItem('cart')
+      window.location.hash = '#success'
+    } catch {
+      window.location.hash = '#cart'
+    }
+  })
+}
+
+const CartPage = `
+  <main class="cart-page" style="max-width:900px; margin:0 auto; padding:48px 4%;">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+    <a href="#checkout" id="cart-checkout" style="display:inline-block; margin-top:24px;">PROCEED TO CHECKOUT</a>
+  </main>
+`
+
+function initCart() {
+  const itemsEl = document.getElementById('cart-items')
+  if (!itemsEl) return
+
+  try {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    if (!Array.isArray(cart) || cart.length === 0) {
+      itemsEl.textContent = 'Your cart is empty.'
+      return
+    }
+
+    const rows = cart.map((item: { name?: string; price?: number; qty?: number }) => {
+      const row = document.createElement('div')
+      row.style.cssText = 'display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid #eee;'
+      const name = document.createElement('span')
+      name.textContent = `${item.name || 'Item'} × ${Number(item.qty) || 0}`
+      const price = document.createElement('span')
+      price.textContent = `$${((Number(item.price) || 0) * (Number(item.qty) || 0)).toFixed(2)}`
+      row.append(name, price)
+      return row
+    })
+    itemsEl.replaceChildren(...rows)
+  } catch {
+    itemsEl.textContent = 'Your cart is empty.'
+  }
+}
+
+const Header = `
+  <header class="site-header">
+    <a href="#" aria-label="Ayra home">AYRA</a>
+    <nav aria-label="Main navigation">
+      <a href="#">Home</a>
+      <a href="#cart">Cart <span id="cart-count">0</span></a>
+    </nav>
+  </header>
+`
+
+function updateCartCount() {
+  const countEl = document.getElementById('cart-count')
+  if (!countEl) return
+
+  try {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    const count = Array.isArray(cart)
+      ? cart.reduce((total: number, item: { qty?: number }) => total + (Number(item.qty) || 0), 0)
+      : 0
+    countEl.textContent = String(count)
+  } catch {
+    countEl.textContent = '0'
+  }
+}
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
@@ -61,13 +147,6 @@ function router() {
     try { initSuccess() } catch(e){ console.error(e) }
     return
   }
-  if (hash.startsWith('#product-')) {
-    const id = parseInt(hash.replace('#product-', ''))
-    app.innerHTML = `${Header} ${ProductDetail}`
-    updateCartCount()
-    initProductDetail(id)
-    return
-  }
   if (hash === '#cart') {
     app.innerHTML = `${Header} ${CartPage}`
     updateCartCount()
@@ -84,11 +163,6 @@ function router() {
   updateCartCount()
   initHome()
 }
-
-document.addEventListener('click', (e) => {
-  const card = (e.target as HTMLElement).closest('.product-card') as HTMLElement
-  if (card?.dataset.id) window.location.hash = `#product-${card.dataset.id}`
-})
 
 window.addEventListener('hashchange', router)
 router()
