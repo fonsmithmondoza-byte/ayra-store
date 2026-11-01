@@ -5,10 +5,22 @@ export const ProductDetail = `
 `
 
 export function initProductDetail(id: number) {
-  fetch(`/products.json/${id}`)
-    .then(r => r.json())
-    .then(p => {
-      document.getElementById('product-detail')!.innerHTML = `
+  const detailEl = document.getElementById('product-detail')!;
+  detailEl.innerHTML = `<p>Loading product...</p>`;
+
+  fetch(`/products.json`)
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load products.json");
+      return r.json()
+    })
+    .then((products: any[]) => {
+      const p = products.find((prod: any) => String(prod.id) === String(id));
+      if (!p) {
+        detailEl.innerHTML = `<p style="padding:40px;">Product #${id} not found. <a href="#" style="text-decoration:underline;">Back to shop</a></p>`;
+        return;
+      }
+
+      detailEl.innerHTML = `
         <div style="display:flex; gap:60px; flex-wrap:wrap;">
           <div style="flex:1; min-width:320px; background:#f6f6f6;">
             <img src="${p.image}" style="width:100%; aspect-ratio:3/4; object-fit:cover;" />
@@ -34,9 +46,14 @@ export function initProductDetail(id: number) {
       // Size selection
       document.querySelectorAll('.size-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.size-btn').forEach(b => (b as HTMLElement).style.background = 'white');
+          document.querySelectorAll('.size-btn').forEach(b => {
+            (b as HTMLElement).style.background = 'white';
+            (b as HTMLElement).style.color = 'black';
+            (b as HTMLElement).style.border = '1px solid #ddd';
+          });
           (btn as HTMLElement).style.background = 'black';
           (btn as HTMLElement).style.color = 'white';
+          (btn as HTMLElement).style.border = '1px solid black';
         })
       })
 
@@ -51,5 +68,9 @@ export function initProductDetail(id: number) {
       document.getElementById('backBtn')!.addEventListener('click', () => {
         window.location.hash = ''
       })
+    })
+    .catch(err => {
+      console.error(err);
+      detailEl.innerHTML = `<p style="color:red; padding:20px;">Failed to load product: ${err.message}</p>`
     })
 }
