@@ -1,84 +1,85 @@
-export const CartPage = `
-  <div id="cart-page" style="padding:40px 4%; min-height:70vh; max-width:1200px; margin:0 auto;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;">
-      <h2 style="font-weight:300; font-size:32px; letter-spacing:1px;">Your Cart</h2>
-      <span id="cart-items-count" style="font-size:13px; opacity:.6; letter-spacing:1px;"></span>
-    </div>
+export const Cart = `
+  <div id="cart-page" style="padding:40px 4%; min-height:70vh; max-width:900px; margin:0 auto;">
+    <h1 style="font-size:28px; font-weight:300; margin-bottom:30px;">Shopping Cart</h1>
     <div id="cart-items"></div>
+    <div id="cart-summary" style="margin-top:40px; border-top:1px solid #eee; padding-top:30px;"></div>
   </div>
+  <div id="cart-toast" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:#111; color:white; padding:14px 28px; font-size:13px; letter-spacing:0.5px; border-radius:2px; opacity:0; transition: all 0.4s ease; z-index:9999; pointer-events:none;"></div>
 `
 
 export function initCart() {
-  const container = document.getElementById('cart-items')!
-  const countEl = document.getElementById('cart-items-count')!
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+  const itemsEl = document.getElementById('cart-items')!;
+  const summaryEl = document.getElementById('cart-summary')!;
+  const toastEl = document.getElementById('cart-toast')!;
 
-  if (countEl) countEl.textContent = `${cart.length} ${cart.length === 1 ? 'ITEM' : 'ITEMS'}`
-
-  if (cart.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:80px 20px; border:1px dashed #ddd;">
-        <p style="font-size:18px; font-weight:300; margin-bottom:12px;">Your cart is empty</p>
-        <p style="opacity:.6; font-size:13px; margin-bottom:24px;">Add some essentials to get started</p>
-        <a href="#" id="continueShop" style="display:inline-block; background:black; color:white; padding:12px 28px; text-decoration:none; letter-spacing:1px; font-size:12px;">CONTINUE SHOPPING</a>
-      </div>
-    `
-    document.getElementById('continueShop')?.addEventListener('click', (e) => {
-      e.preventDefault()
-      window.location.hash = ''
-    })
-    return
+  function showToast(msg: string) {
+    toastEl.innerText = msg;
+    toastEl.style.transform = 'translateX(-50%) translateY(0)';
+    toastEl.style.opacity = '1';
+    setTimeout(() => {
+      toastEl.style.transform = 'translateX(-50%) translateY(100px)';
+      toastEl.style.opacity = '0';
+    }, 2500);
   }
 
-  let total = cart.reduce((s:number, p:any) => s + p.price, 0)
+  function render() {
+    let cart: any[] = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    if (cart.length === 0) {
+      itemsEl.innerHTML = `<p style="padding:40px 0; opacity:0.6;">Your cart is empty. <a href="#" style="text-decoration:underline;">Continue shopping</a></p>`;
+      summaryEl.innerHTML = '';
+      return;
+    }
 
-  container.innerHTML = `
-    <div style="display:flex; gap:60px; flex-wrap:wrap;">
-      <div style="flex:2; min-width:320px; display:grid; gap:20px;">
-        ${cart.map((p:any, i:number) => `
-          <div style="display:flex; gap:20px; padding:20px; background:#fafafa; border:1px solid #f0f0f0;">
-            <img src="${p.image}" style="width:110px; height:140px; object-fit:cover; background:white;" />
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
-              <div>
-                <p style="font-size:11px; letter-spacing:2px; opacity:.5; margin-bottom:4px;">${p.category}</p>
-                <p style="font-weight:400; font-size:15px; letter-spacing:.5px;">${p.name}</p>
-                <p style="font-size:12px; opacity:.6; margin-top:6px;">Size: M • Qty: 1</p>
-              </div>
-              <p style="font-weight:600; font-size:14px;">$${p.price}</p>
-            </div>
-            <button data-index="${i}" class="remove-btn" style="background:none; border:none; font-size:11px; letter-spacing:1px; text-decoration:underline; cursor:pointer; align-self:flex-start; opacity:.6;">REMOVE</button>
+    let total = 0;
+    itemsEl.innerHTML = cart.map((p: any, i: number) => {
+      total += Number(p.price);
+      return `
+        <div style="display:flex; gap:20px; padding:20px 0; border-bottom:1px solid #f0f0f0; align-items:center;">
+          <img src="${p.image}" style="width:80px; height:100px; object-fit:cover; background:#f6f6f6;" />
+          <div style="flex:1;">
+            <h3 style="font-size:14px; font-weight:400;">${p.name}</h3>
+            <p style="font-size:12px; opacity:0.6; margin-top:4px;">Size: M • Qty: 1</p>
+            <p style="font-size:14px; font-weight:600; margin-top:8px;">$${p.price}</p>
           </div>
-        `).join('')}
-      </div>
-      
-      <div style="flex:1; min-width:280px; background:#f9f9f9; padding:28px; height:fit-content; position:sticky; top:100px;">
-        <h3 style="font-size:14px; letter-spacing:2px; margin-bottom:20px;">ORDER SUMMARY</h3>
-        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:12px; opacity:.7;"><span>Subtotal</span><span>$${total}</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:12px; opacity:.7;"><span>Shipping</span><span>Free</span></div>
-        <div style="border-top:1px solid #ddd; margin:16px 0;"></div>
-        <div style="display:flex; justify-content:space-between; font-weight:600; font-size:16px; margin-bottom:24px;"><span>Total</span><span>$${total}</span></div>
-        <button id="checkoutBtn" style="width:100%; background:black; color:white; padding:16px; border:none; letter-spacing:2px; font-size:12px; cursor:pointer;">PROCEED TO CHECKOUT</button>
-        <button id="backShopBtn" style="width:100%; background:white; color:black; padding:14px; border:1px solid black; letter-spacing:1px; font-size:11px; cursor:pointer; margin-top:12px;">← CONTINUE SHOPPING</button>
-        <p style="font-size:11px; opacity:.5; text-align:center; margin-top:16px; letter-spacing:.5px;">Free shipping • 30-day returns</p>
-      </div>
-    </div>
-  `
+          <button data-remove="${i}" style="border:none; background:none; font-size:12px; text-decoration:underline; cursor:pointer; opacity:0.6;">Remove</button>
+        </div>
+      `;
+    }).join('');
 
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = parseInt((btn as HTMLElement).dataset.index!)
-      cart.splice(idx, 1)
-      localStorage.setItem('cart', JSON.stringify(cart))
-      initCart()
-      // Update header badge live
-      const headerBadge = document.getElementById('cart-count')
-      if (headerBadge) headerBadge.textContent = cart.length.toString()
-    })
-  })
+    summaryEl.innerHTML = `
+      <div style="display:flex; justify-content:space-between; font-weight:600; margin-bottom:20px;">
+        <span>Total</span><span>$${total}</span>
+      </div>
+      <button id="checkoutBtn" style="width:100%; background:black; color:white; padding:16px; border:none; letter-spacing:2px; font-size:13px; cursor:pointer;">PROCEED TO CHECKOUT</button>
+      <button id="continueBtn" style="width:100%; background:white; color:black; padding:16px; border:1px solid black; letter-spacing:1px; font-size:13px; cursor:pointer; margin-top:12px;">← CONTINUE SHOPPING</button>
+      <p style="text-align:center; font-size:11px; opacity:0.5; margin-top:16px;">Free shipping • 30-day returns</p>
+    `;
 
-  document.getElementById('backShopBtn')!.addEventListener('click', () => window.location.hash = '')
-  document.getElementById('checkoutBtn')!.addEventListener('click', () => {
-    alert(`Checkout $${total} - Ready to build Payment page next!`)
-    window.location.hash = '#checkout'
-  })
+    // Remove handlers
+    document.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number((btn as HTMLElement).dataset.remove);
+        cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast('Item removed');
+        render();
+      });
+    });
+
+    document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+      // NO ALERT - professional navigation
+      if (cart.length === 0) return;
+      showToast(`Proceeding to checkout • $${total}`);
+      setTimeout(() => {
+        window.location.hash = '#checkout';
+      }, 400);
+    });
+
+    document.getElementById('continueBtn')?.addEventListener('click', () => {
+      window.location.hash = '';
+    });
+  }
+
+  render();
 }
