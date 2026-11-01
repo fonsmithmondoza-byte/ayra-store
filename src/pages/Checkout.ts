@@ -39,6 +39,20 @@ export const SuccessPage = `
   </div>
 `
 
+function showToast(msg: string) {
+  let t = document.getElementById('ayra-toast') as HTMLDivElement | null
+  if (!t) {
+    t = document.createElement('div')
+    t.id = 'ayra-toast'
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 28px;font-size:13px;letter-spacing:.5px;z-index:99999;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:opacity .3s;'
+    document.body.appendChild(t)
+  }
+  t.textContent = msg
+  t.style.opacity = '1'
+  t.style.display = 'block'
+  setTimeout(() => { if (t) t.style.opacity = '0' }, 3000)
+}
+
 export function initCheckout() {
   const cart = JSON.parse(localStorage.getItem('cart') || '[]')
   const total = cart.reduce((s:number, p:any) => s + p.price, 0)
@@ -73,7 +87,7 @@ export function initCheckout() {
     const address = (document.getElementById('c-address') as HTMLInputElement).value
 
     if (!name || !email || !address) {
-      alert('Please fill Name, Email, and Address')
+      showToast('Please fill Name, Email, and Address')
       return
     }
 
