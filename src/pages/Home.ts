@@ -32,6 +32,12 @@ export const Home = `
     <a href="#register" id="registerLink" style="font-size:11px; font-weight:700; text-decoration:none; color:#111; border:1px solid #111; padding:6px 14px; border-radius:4px;">REGISTER</a>
     <span id="userBox" style="display:none; font-size:12px; font-weight:700;"></span>
     <a href="#cart" style="font-size:12px; font-weight:700; text-decoration:none; color:#111; display:flex; gap:4px;">CART <span id="cart-count">0</span></a>
+    <!-- BOLD HAMBURGER - ADDED HERE -->
+    <div id="hamburgerBtn" style="width:38px; height:38px; display:flex; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; padding:6px 7px; border:1.8px solid #111; border-radius:6px; margin-left:4px;">
+      <span style="display:block; height:3.5px; background:#111; border-radius:2px; width:100%;"></span>
+      <span style="display:block; height:3.5px; background:#111; border-radius:2px; width:100%;"></span>
+      <span style="display:block; height:3.5px; background:#111; border-radius:2px; width:100%;"></span>
+    </div>
   </div>
 </div>
 
@@ -105,6 +111,45 @@ export const Home = `
   <span>© 2025 AYRA. All rights reserved.</span><span>Designed in Cameroon 🇨🇲</span>
 </div>
 
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div id="drawerOverlay" style="position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,0,0,.45); z-index:9998; display:none;"></div>
+
+<!-- DRAWER MENU - AFFILIATE OPTIONS -->
+<div id="ayraDrawer" style="position:fixed; top:0; right:-100%; width:330px; height:100vh; background:#fff; z-index:9999; box-shadow:-12px 0 40px rgba(0,0,0,.25); transition:right 0.32s ease; display:flex; flex-direction:column; font-family:Inter,sans-serif; overflow-y:auto;">
+  <div style="background:#0f172a; color:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0;">
+    <div style="font-weight:900; letter-spacing:1px;">Λ AYRA</div>
+    <div id="closeDrawer" style="font-size:18px; cursor:pointer; background:#fff; color:#0f172a; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900;">✕</div>
+  </div>
+  <div style="padding:16px;">
+    <div style="background:#f1f5f9; padding:12px; border-radius:10px; display:flex; gap:10px; align-items:center; margin-bottom:14px;">
+      <div style="width:42px; height:42px; background:#0f172a; border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px;">A</div>
+      <div><div id="drawerUserName" style="font-weight:800; font-size:14px;">Guest</div><div style="font-size:11px; color:#64748b;">Affiliate Member</div></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="drawer-link" data-go="home" style="padding:12px 14px; border-radius:8px; cursor:pointer; display:flex; gap:12px; font-size:14px; font-weight:600; background:#f8fafc;">🏠 Home</div>
+      <div class="drawer-link" data-go="profile" style="padding:12px 14px; border-radius:8px; cursor:pointer; display:flex; gap:12px; font-size:14px; font-weight:600;">👤 Affiliate Profile</div>
+      <div class="drawer-link" data-go="dashboard" style="padding:12px 14px; border-radius:8px; cursor:pointer; display:flex; gap:12px; font-size:14px; font-weight:600;">📊 Dashboard</div>
+      <div class="drawer-link" data-go="wallet" style="padding:12px 14px; border-radius:8px; cursor:pointer; display:flex; gap:12px; font-size:14px; font-weight:600;">💰 Wallet & Payouts</div>
+      <div class="drawer-link" data-go="settings" style="padding:12px 14px; border-radius:8px; cursor:pointer; display:flex; gap:12px; font-size:14px; font-weight:600;">⚙️ Settings</div>
+    </div>
+    
+    <div style="margin-top:18px; padding:14px; background:#fffbeb; border:1.8px dashed #facc15; border-radius:12px;">
+      <div style="font-weight:900; font-size:13px; margin-bottom:8px;">🔗 Your Affiliate Link</div>
+      <div id="affLinkText" style="font-size:11px; background:#fff; padding:10px; border-radius:8px; border:1px solid #e2e8f0; word-break:break-all; line-height:1.4;">https://ayra-store.vercel.app/?ref=guest</div>
+      <button id="copyAffLink" style="margin-top:10px; width:100%; background:#0f172a; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:800; cursor:pointer; font-size:12px;">Copy Affiliate Link</button>
+      <div style="font-size:10.5px; color:#64748b; margin-top:8px; line-height:1.4;">Share this link to promote products. When a client clicks it, they go straight to your affiliate store and you earn commission.</div>
+      <div style="margin-top:10px; display:flex; gap:6px;">
+        <input id="affProductId" placeholder="Product ID (optional)" style="flex:1; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-size:11px;" />
+        <button id="genProductLink" style="background:#facc15; border:none; padding:8px 10px; border-radius:6px; font-weight:800; font-size:11px; cursor:pointer;">Generate</button>
+      </div>
+    </div>
+
+    <button id="drawerLogout" style="margin-top:18px; width:100%; background:#111; color:#fff; border:none; padding:12px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13px; display:none;">Log Out</button>
+    <a href="#login" id="drawerLogin" style="margin-top:18px; width:100%; background:#111; color:#fff; border:none; padding:12px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13px; display:block; text-align:center; text-decoration:none;">LOGIN</a>
+  </div>
 </div>
 `
 
@@ -206,5 +251,70 @@ export function initHome(){
       updateCart()
       alert('Added to cart')
     }
+  })
+
+  // ===== HAMBURGER DRAWER LOGIC - NEW =====
+  const hamb = document.getElementById('hamburgerBtn')
+  const drawer = document.getElementById('ayraDrawer')
+  const overlay = document.getElementById('drawerOverlay')
+  const close = document.getElementById('closeDrawer')
+  const drawerName = document.getElementById('drawerUserName')
+  const affText = document.getElementById('affLinkText')
+  const logoutBtn = document.getElementById('drawerLogout')
+  const loginBtnDrawer = document.getElementById('drawerLogin')
+
+  function openDrawer(){ if(drawer) drawer.style.right='0'; if(overlay) overlay.style.display='block'; }
+  function closeDrawer(){ if(drawer) drawer.style.right='-100%'; if(overlay) overlay.style.display='none'; }
+
+  hamb?.addEventListener('click', openDrawer)
+  close?.addEventListener('click', closeDrawer)
+  overlay?.addEventListener('click', closeDrawer)
+
+  // Set user info + affiliate link
+  if(user){
+    if(drawerName) drawerName.textContent = user.name || user.email || 'fonsmithmondoza'
+    if(affText){
+      const ref = (user.name || user.email || 'fonsmithmondoza').toString().replace(/\s+/g,'').toLowerCase()
+      affText.textContent = `https://ayra-store.vercel.app/?ref=${ref}`
+    }
+    if(logoutBtn) logoutBtn.style.display='block'
+    if(loginBtnDrawer) loginBtnDrawer.style.display='none'
+  }else{
+    if(drawerName) drawerName.textContent = 'Guest'
+    if(logoutBtn) logoutBtn.style.display='none'
+    if(loginBtnDrawer) loginBtnDrawer.style.display='block'
+  }
+
+  document.getElementById('copyAffLink')?.addEventListener('click', ()=>{
+    const txt = document.getElementById('affLinkText')?.textContent || ''
+    navigator.clipboard.writeText(txt)
+    alert('Affiliate link copied!')
+  })
+
+  document.getElementById('genProductLink')?.addEventListener('click', ()=>{
+    const pid = (document.getElementById('affProductId') as HTMLInputElement).value.trim()
+    const base = document.getElementById('affLinkText')?.textContent?.split('&product')[0] || ''
+    if(pid && base){
+      const newLink = base + `&product=${pid}`
+      const el = document.getElementById('affLinkText')
+      if(el) el.textContent = newLink
+    }
+  })
+
+  document.getElementById('drawerLogout')?.addEventListener('click', ()=>{
+    localStorage.removeItem('ayra_user')
+    location.reload()
+  })
+
+  document.querySelectorAll('.drawer-link').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const go = (el as HTMLElement).getAttribute('data-go')
+      closeDrawer()
+      if(go==='home') window.scrollTo({top:0, behavior:'smooth'})
+      if(go==='dashboard') location.hash='#dashboard'
+      if(go==='profile') alert('Affiliate Profile page coming next')
+      if(go==='wallet') alert('Wallet & Payouts page coming next')
+      if(go==='settings') alert('Settings page coming next')
+    })
   })
 }
